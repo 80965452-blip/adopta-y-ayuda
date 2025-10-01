@@ -1,230 +1,248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Adopta y Ayuda - Adopciones</title>
-  <meta name="description" content="Adopta y Ayuda - Adopta a tu nuevo mejor amigo. Sistema de adopción demo.">
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adopta y Ayuda</title>
   <style>
-    :root{
-      --card:#fff;
-      --accent:#8B4513;
-      --muted:#5a4634;
-      --radius:12px;
-      font-family: 'Special Elite', cursive, serif;
+    body {
+      background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1600&h=900&fit=crop') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Courier New', monospace;
+      color: #3b2a1a;
+      margin: 0;
+      padding: 0;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:url('https://cdn.pixabay.com/photo/2016/11/29/03/53/paper-1868676_1280.jpg') no-repeat center center fixed;
-      background-size:cover;
-      color:#2c1810;
-    }
-    header{
-      background:rgba(139,69,19,0.9);
-      color:#fff;
-      padding:28px 18px;
-      text-align:center;
-      border-bottom:6px solid #3e1e0d;
-    }
-    .container{max-width:1100px;margin:22px auto;padding:0 18px}
-    h1{margin:0;font-size:40px;letter-spacing:2px;text-transform:uppercase}
-    p.lead{margin:6px 0 0;font-size:18px}
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:18px}
-    .card{
-      background:var(--card);
-      border:3px solid #3e1e0d;
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow:0 8px 20px rgba(20,10,0,0.4);
-      display:flex;
-      flex-direction:column;
-      transition:transform 0.2s;
+    header {
+      background: rgba(139, 69, 19, 0.9);
+      color: #fff8dc;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 4px solid #3b2a1a;
     }
-    .card:hover{transform:scale(1.02)}
-    .thumb{
-      height:180px;
-      border:3px solid #3e1e0d;
-      background-size:cover;
-      background-position:center;
-      margin-bottom:12px
-    }
-    .meta{display:flex;gap:8px;align-items:center;justify-content:space-between}
-    .name{font-weight:700;font-size:20px}
-    .muted{color:var(--muted);font-size:14px}
-    .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
-    button{
-      cursor:pointer;
-      border:2px solid #3e1e0d;
-      padding:8px 12px;
-      border-radius:8px;
-      background:#d2b48c;
-      color:#2c1810;
-      font-weight:700;
-      transition:background 0.2s;
-    }
-    button:hover{background:#deb887}
-    button.secondary{background:#fff8dc}
-    button.ghost{background:transparent}
-    .small{padding:6px 10px;font-size:14px}
 
-    .modal-backdrop{position:fixed;inset:0;background:rgba(20,10,0,0.6);display:none;align-items:center;justify-content:center;padding:18px}
-    .modal{width:100%;max-width:640px;background:#fff8dc;border:4px solid #3e1e0d;border-radius:12px;padding:18px}
-
-    label{font-weight:600;font-size:14px}
-    input[type="text"],textarea,select{
-      width:100%;padding:10px;border-radius:8px;border:1px solid #b8860b;font-size:14px
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
     }
-    textarea{min-height:80px}
-    .note{background:#fff6db;padding:10px;border-radius:8px;border:1px solid #b8860b;color:#6b4a00}
-    footer{margin:28px 0 80px;color:#3e1e0d;text-align:center;font-size:14px}
 
-    .reviews{margin-top:12px}
-    .review{border-top:1px dashed #b8860b;padding:8px 0}
-    .rating{font-weight:700;color:#8B0000}
-    @media (max-width:640px){.thumb{height:140px}}
+    header p {
+      margin: 0.5rem 0 0;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px #fff;
+    }
+
+    .dog-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .dog-card {
+      background: #fff8dc;
+      border: 3px solid #3b2a1a;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 4px 4px 0 #3b2a1a;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .dog-card:hover {
+      transform: scale(1.05);
+    }
+
+    .dog-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border: 2px solid #3b2a1a;
+      margin-bottom: 1rem;
+    }
+
+    .dog-card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .dog-card p {
+      margin: 0.3rem 0;
+    }
+
+    .buttons {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    button {
+      background: #d2b48c;
+      border: 2px solid #3b2a1a;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #a0522d;
+      color: white;
+    }
+
+    footer {
+      background: rgba(139, 69, 19, 0.9);
+      color: #fff8dc;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-top: 4px solid #3b2a1a;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Adopta y Ayuda</h1>
-    <p class="lead">Encuentra y solicita la adopción de tu compañero ideal.</p>
+    <p>Encuentra a tu nuevo mejor amigo 🐾 — Proyecto escolar</p>
   </header>
 
-  <main class="container">
-    <section aria-labelledby="catalogo">
-      <h2 id="catalogo">Perros disponibles</h2>
-      <p class="muted">Haz clic en <strong>Ver</strong> para más detalles o en <strong>Adoptar</strong> para iniciar la solicitud.</p>
-      <div id="list" class="grid" aria-live="polite"></div>
-    </section>
+  <main>
+    <h2>Perros disponibles</h2>
+    <div class="dog-list">
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=800" alt="Luna">
+        <h3>Luna</h3>
+        <p>2 años • Mestiza</p>
+        <p>Alegre y sociable, le encanta jugar.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
 
-    <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="modal" id="modalContent">
-        <button id="closeModal" class="ghost small" style="float:right">Cerrar ✕</button>
-        <div id="ficha"></div>
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800" alt="Max">
+        <h3>Max</h3>
+        <p>4 años • Labrador</p>
+        <p>Cariñoso y tranquilo. Ideal para familias.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Mora">
+        <h3>Mora</h3>
+        <p>1 año • Pequeña</p>
+        <p>Enérgica y curiosa. Necesita paseos diarios.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b6?w=800" alt="Rocky">
+        <h3>Rocky</h3>
+        <p>3 años • Pastor</p>
+        <p>Protector y leal. Requiere espacio para correr.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1558788353-5e3bdfa1c7b5?w=800" alt="Nina">
+        <h3>Nina</h3>
+        <p>5 años • Golden Retriever</p>
+        <p>Dulce, calmada y obediente.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1f2c8a5?w=800" alt="Toby">
+        <h3>Toby</h3>
+        <p>2 años • Beagle</p>
+        <p>Travieso y amigable.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Kiara">
+        <h3>Kiara</h3>
+        <p>6 meses • Mestiza pequeña</p>
+        <p>Cachorra juguetona y cariñosa.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Duke">
+        <h3>Duke</h3>
+        <p>3 años • Husky</p>
+        <p>Enérgico y protector, necesita ejercicio diario.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1601979039942-c9e8c27c3f5f?w=800" alt="Sasha">
+        <h3>Sasha</h3>
+        <p>4 años • Boxer</p>
+        <p>Noble y muy cariñosa.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <img src="https://images.unsplash.com/photo-1601758125946-4a53c44e38f3?w=800" alt="Coco">
+        <h3>Coco</h3>
+        <p>2 años • French Bulldog</p>
+        <p>Simpático y juguetón.</p>
+        <div class="buttons">
+          <button>Ver</button>
+          <button>Adoptar</button>
+          <button>Compartir</button>
+        </div>
       </div>
     </div>
-
-    <section style="margin-top:20px">
-      <h3>Solicitudes recientes</h3>
-      <div id="solicitudes" class="muted">No hay solicitudes aún.</div>
-    </section>
-
-    <footer>
-      © Adopta y Ayuda — Proyecto escolar estilo viejo oeste 🤠
-    </footer>
   </main>
 
-<script>
-const DOGS = [
-  {id:'luna',name:'Luna',age:'2 años',breed:'Mestiza',desc:'Alegre, sociable y le encanta jugar.',img:'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=600&h=400&fit=crop'},
-  {id:'max',name:'Max',age:'4 años',breed:'Labrador',desc:'Cariñoso y tranquilo. Ideal para familias.',img:'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&h=400&fit=crop'},
-  {id:'mora',name:'Mora',age:'1 año',breed:'Pequeña',desc:'Enérgica y curiosa. Necesita paseos diarios.',img:'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=400&fit=crop'},
-  {id:'rocky',name:'Rocky',age:'3 años',breed:'Pastor',desc:'Protectivo y leal. Requiere espacio para correr.',img:'https://images.unsplash.com/photo-1619983081563-430f636ad1b3?w=600&h=400&fit=crop'},
-  {id:'nina',name:'Nina',age:'5 años',breed:'Golden Retriever',desc:'Dulce, calmada y obediente.',img:'https://images.unsplash.com/photo-1507149833265-60c372daea22?w=600&h=400&fit=crop'},
-  {id:'toby',name:'Toby',age:'2 años',breed:'Beagle',desc:'Travieso y amigable.',img:'https://images.unsplash.com/photo-1504595403659-9088ce801e29?w=600&h=400&fit=crop'},
-  {id:'kiara',name:'Kiara',age:'6 meses',breed:'Mestiza pequeña',desc:'Cachorra juguetona.',img:'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&h=400&fit=crop'},
-  {id:'duke',name:'Duke',age:'3 años',breed:'Husky',desc:'Energético y protector.',img:'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&h=400&fit=crop'},
-  {id:'sasha',name:'Sasha',age:'4 años',breed:'Boxer',desc:'Valiente y cariñosa.',img:'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=600&h=400&fit=crop'},
-  {id:'coco',name:'Coco',age:'2 años',breed:'French Bulldog',desc:'Pequeño y juguetón.',img:'https://images.unsplash.com/photo-1625246333195-d362cf6c5f77?w=600&h=400&fit=crop'}
-];
-
-const listEl=document.getElementById('list');
-const modal=document.getElementById('modal');
-const fichaEl=document.getElementById('ficha');
-const closeModal=document.getElementById('closeModal');
-const solicitudesEl=document.getElementById('solicitudes');
-
-function loadReviews(){return JSON.parse(localStorage.getItem('adopta_reviews')||'{}');}
-function saveReviews(o){localStorage.setItem('adopta_reviews',JSON.stringify(o));}
-function loadSolicitudes(){return JSON.parse(localStorage.getItem('adopta_solicitudes')||'[]');}
-function saveSolicitudes(a){localStorage.setItem('adopta_solicitudes',JSON.stringify(a));}
-
-function renderList(){
-  listEl.innerHTML='';
-  DOGS.forEach(d=>{
-    const card=document.createElement('article');card.className='card';
-    card.innerHTML=`
-      <div class="thumb" style="background-image:url('${d.img}')"></div>
-      <div class="meta"><div><div class="name">${d.name}</div><div class="muted">${d.age} • ${d.breed}</div></div></div>
-      <p>${d.desc}</p>
-      <div class="actions">
-        <button onclick="openFicha('${d.id}')">Ver</button>
-        <button onclick="startAdopt('${d.id}')">Adoptar</button>
-        <button class="secondary" onclick="shareDog('${d.id}')">Compartir</button>
-      </div>`;
-    listEl.appendChild(card);
-  });
-}
-
-function renderSolicitudes(){
-  const s=loadSolicitudes();
-  if(!s.length){solicitudesEl.textContent='No hay solicitudes aún.';return}
-  solicitudesEl.innerHTML='';
-  s.slice().reverse().forEach(req=>{
-    const d=DOGS.find(x=>x.id===req.dogId)||{name:req.dogId};
-    const div=document.createElement('div');div.style.marginBottom='8px';
-    div.innerHTML=`<strong>${req.name}</strong> solicitó a <strong>${d.name}</strong> — Dirección: ${req.address} — Estado: <em>${req.status}</em>`;
-    solicitudesEl.appendChild(div);
-  });
-}
-
-function openFicha(id){
-  const dog=DOGS.find(d=>d.id===id);
-  fichaEl.innerHTML=`
-    <h2>${dog.name}</h2>
-    <img src="${dog.img}" alt="${dog.name}" style="width:100%;border:3px solid #3e1e0d;margin-bottom:10px">
-    <p><strong>Edad:</strong> ${dog.age} — <strong>Raza:</strong> ${dog.breed}</p>
-    <p>${dog.desc}</p>
-    <button onclick="startAdopt('${id}')">Iniciar adopción</button>
-    <button class="secondary" onclick="shareDog('${id}')">Compartir</button>`;
-  showModal();
-}
-
-function showModal(){modal.style.display='flex';modal.setAttribute('aria-hidden','false');}
-function hideModal(){modal.style.display='none';modal.setAttribute('aria-hidden','true');}
-closeModal.addEventListener('click',hideModal);
-modal.addEventListener('click',e=>{if(e.target===modal)hideModal();});
-
-function startAdopt(id){
-  const dog=DOGS.find(d=>d.id===id);
-  fichaEl.innerHTML=`
-    <h2>Solicitud de adopción — ${dog.name}</h2>
-    <form onsubmit="event.preventDefault();submitAdoption('${id}')">
-      <label>Nombre completo</label><input id="fullname" required>
-      <label>Dirección</label><input id="address" required>
-      <label>Teléfono</label><input id="phone">
-      <button type="submit">Enviar solicitud</button>
-    </form>`;
-  showModal();
-}
-
-function submitAdoption(dogId){
-  const name=document.getElementById('fullname').value.trim();
-  const address=document.getElementById('address').value.trim();
-  const phone=document.getElementById('phone').value.trim();
-  if(!address){alert('La dirección es obligatoria.');return}
-  const solicitudes=loadSolicitudes();
-  const solicitud={id:'s_'+Date.now(),dogId,name,address,phone,status:'En revisión'};
-  solicitudes.push(solicitud);saveSolicitudes(solicitudes);renderSolicitudes();
-  fichaEl.innerHTML=`<h2>Solicitud enviada ✔</h2><p>Gracias, ${name}. Tu solicitud para adoptar a ${DOGS.find(d=>d.id===dogId).name} ha sido enviada.</p>`;
-}
-
-function shareDog(id){
-  const dog=DOGS.find(d=>d.id===id);
-  const url=window.location.href.split('#')[0]+'#'+id;
-  if(navigator.share){
-    navigator.share({title:'Adopta a '+dog.name,text:dog.desc,url});
-  }else{
-    navigator.clipboard.writeText(url);
-    alert("Enlace copiado: "+url);
-  }
-}
-
-renderList();
-renderSolicitudes();
-</script>
+  <footer>
+    © 2025 Adopta y Ayuda — Proyecto escolar.  
+  </footer>
 </body>
 </html>
