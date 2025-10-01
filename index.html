@@ -6,243 +6,150 @@
   <title>Adopta y Ayuda</title>
   <style>
     body {
-      background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1600&h=900&fit=crop') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Courier New', monospace;
-      color: #3b2a1a;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
+      background: url('https://i.ibb.co/3sD1bt6/pergamino-textura.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
 
-    header {
-      background: rgba(139, 69, 19, 0.9);
-      color: #fff8dc;
-      padding: 1rem;
+    h1 {
       text-align: center;
-      border-bottom: 4px solid #3b2a1a;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-    }
-
-    header p {
-      margin: 0.5rem 0 0;
-    }
-
-    main {
-      padding: 2rem;
-    }
-
-    h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
+      padding: 20px;
+      color: #4a2c0a;
       text-shadow: 1px 1px #fff;
     }
 
-    .dog-list {
+    .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
 
-    .dog-card {
-      background: #fff8dc;
-      border: 3px solid #3b2a1a;
+    .card {
+      background-color: rgba(255, 248, 220, 0.95);
+      border: 3px solid #4a2c0a;
       border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 4px 4px 0 #3b2a1a;
-      text-align: center;
-      transition: transform 0.2s;
+      padding: 15px;
+      box-shadow: 6px 6px 0px #2a1a0a;
     }
 
-    .dog-card:hover {
-      transform: scale(1.05);
-    }
-
-    .dog-card img {
+    .card img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
-      border: 2px solid #3b2a1a;
-      margin-bottom: 1rem;
+      border: 2px solid #4a2c0a;
     }
 
-    .dog-card h3 {
-      margin: 0.5rem 0;
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #3a1a0a;
     }
 
-    .dog-card p {
-      margin: 0.3rem 0;
+    .card p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #2a1a0a;
     }
 
     .buttons {
-      margin-top: 0.5rem;
+      margin-top: 10px;
       display: flex;
-      justify-content: center;
-      gap: 0.5rem;
+      justify-content: space-between;
     }
 
-    button {
-      background: #d2b48c;
-      border: 2px solid #3b2a1a;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+    .buttons button {
+      background-color: #c4a484;
+      border: 2px solid #4a2c0a;
+      border-radius: 5px;
+      padding: 6px 12px;
       cursor: pointer;
       font-weight: bold;
     }
 
-    button:hover {
-      background: #a0522d;
+    .buttons button:hover {
+      background-color: #a67c52;
       color: white;
-    }
-
-    footer {
-      background: rgba(139, 69, 19, 0.9);
-      color: #fff8dc;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      border-top: 4px solid #3b2a1a;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Adopta y Ayuda</h1>
-    <p>Encuentra a tu nuevo mejor amigo 🐾 — Proyecto escolar</p>
-  </header>
-
-  <main>
-    <h2>Perros disponibles</h2>
-    <div class="dog-list">
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=800" alt="Luna">
-        <h3>Luna</h3>
-        <p>2 años • Mestiza</p>
-        <p>Alegre y sociable, le encanta jugar.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800" alt="Max">
-        <h3>Max</h3>
-        <p>4 años • Labrador</p>
-        <p>Cariñoso y tranquilo. Ideal para familias.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Mora">
-        <h3>Mora</h3>
-        <p>1 año • Pequeña</p>
-        <p>Enérgica y curiosa. Necesita paseos diarios.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b6?w=800" alt="Rocky">
-        <h3>Rocky</h3>
-        <p>3 años • Pastor</p>
-        <p>Protector y leal. Requiere espacio para correr.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1558788353-5e3bdfa1c7b5?w=800" alt="Nina">
-        <h3>Nina</h3>
-        <p>5 años • Golden Retriever</p>
-        <p>Dulce, calmada y obediente.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1583337130417-3346a1f2c8a5?w=800" alt="Toby">
-        <h3>Toby</h3>
-        <p>2 años • Beagle</p>
-        <p>Travieso y amigable.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Kiara">
-        <h3>Kiara</h3>
-        <p>6 meses • Mestiza pequeña</p>
-        <p>Cachorra juguetona y cariñosa.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Duke">
-        <h3>Duke</h3>
-        <p>3 años • Husky</p>
-        <p>Enérgico y protector, necesita ejercicio diario.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1601979039942-c9e8c27c3f5f?w=800" alt="Sasha">
-        <h3>Sasha</h3>
-        <p>4 años • Boxer</p>
-        <p>Noble y muy cariñosa.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
-      </div>
-
-      <div class="dog-card">
-        <img src="https://images.unsplash.com/photo-1601758125946-4a53c44e38f3?w=800" alt="Coco">
-        <h3>Coco</h3>
-        <p>2 años • French Bulldog</p>
-        <p>Simpático y juguetón.</p>
-        <div class="buttons">
-          <button>Ver</button>
-          <button>Adoptar</button>
-          <button>Compartir</button>
-        </div>
+  <h1>🐾 Adopta y Ayuda 🐾</h1>
+  <div class="container">
+    
+    <div class="card" id="perro-luna">
+      <img src="https://images.unsplash.com/photo-1601758124163-0c3b1d1e84a4?w=800" alt="Luna">
+      <h3>Luna</h3>
+      <p>2 años • Mestiza</p>
+      <p>Alegre, sociable y le encanta jugar.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
       </div>
     </div>
-  </main>
 
-  <footer>
-    © 2025 Adopta y Ayuda — Proyecto escolar.  
-  </footer>
+    <div class="card" id="perro-max">
+      <img src="https://images.unsplash.com/photo-1507149833265-60c372daea22?w=800" alt="Max">
+      <h3>Max</h3>
+      <p>4 años • Labrador</p>
+      <p>Cariñoso y tranquilo. Ideal para familias.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
+      </div>
+    </div>
+
+    <div class="card" id="perro-mora">
+      <img src="https://images.unsplash.com/photo-1605433246937-0cabe9a4c81c?w=800" alt="Mora">
+      <h3>Mora</h3>
+      <p>1 año • Pequeña</p>
+      <p>Enérgica y curiosa. Necesita paseos diarios.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
+      </div>
+    </div>
+
+    <div class="card" id="perro-rocky">
+      <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800" alt="Rocky">
+      <h3>Rocky</h3>
+      <p>3 años • Pastor</p>
+      <p>Protector y leal. Requiere espacio para correr.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
+      </div>
+    </div>
+
+    <div class="card" id="perro-nina">
+      <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800" alt="Nina">
+      <h3>Nina</h3>
+      <p>5 años • Golden Retriever</p>
+      <p>Dulce, calmada y obediente.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
+      </div>
+    </div>
+
+    <div class="card" id="perro-toby">
+      <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=800" alt="Toby">
+      <h3>Toby</h3>
+      <p>2 años • Beagle</p>
+      <p>Travieso y amigable.</p>
+      <div class="buttons">
+        <button>Ver</button>
+        <button>Adoptar</button>
+        <button>Compartir</button>
+      </div>
+    </div>
+
+  </div>
 </body>
 </html>
