@@ -7,7 +7,7 @@
   <meta name="description" content="Adopta y Ayuda - Adopta a tu nuevo mejor amigo. Sistema de adopción demo.">
   <style>
     :root{
-      --bg:#f6f7fb; --card:#fff; --accent:#2b8aef; --muted:#6b7280; --danger:#e11d48; --glass: rgba(255,255,255,0.7);
+      --bg:#f6f7fb; --card:#fff; --accent:#2b8aef; --muted:#6b7280;
       --radius:12px; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
     *{box-sizing:border-box}
@@ -31,7 +31,7 @@
 
     /* Modal */
     .modal-backdrop{position:fixed;inset:0;background:rgba(10,12,20,0.45);display:none;align-items:center;justify-content:center;padding:18px}
-    .modal{width:100%;max-width:640px;background:var(--card);border-radius:12px;padding:18px}
+    .modal{width:100%;max-width:640px;background:var(--card);border-radius:12px;padding:18px;max-height:90vh;overflow-y:auto}
 
     form .row{display:flex;gap:10px}
     label{font-weight:600;font-size:14px}
@@ -85,31 +85,32 @@
   </main>
 
 <script>
-// Datos iniciales (10 perros inventados con fotos)
+// Datos de perros ficticios
 const DOGS = [
-  {id:'luna',name:'Luna',age:'2 años',breed:'Mestiza',desc:'Alegre, sociable y le encanta jugar. Buena con niños.',img:'https://place-puppy.com/400x300'},
+  {id:'luna',name:'Luna',age:'2 años',breed:'Mestiza',desc:'Alegre, sociable y le encanta jugar.',img:'https://place-puppy.com/400x300'},
   {id:'max',name:'Max',age:'4 años',breed:'Labrador mix',desc:'Cariñoso y tranquilo. Ideal para familias.',img:'https://place-puppy.com/401x300'},
   {id:'mora',name:'Mora',age:'1 año',breed:'Pequeña',desc:'Enérgica y curiosa. Necesita paseos diarios.',img:'https://place-puppy.com/402x300'},
-  {id:'oco',name:'Ocho',age:'3 años',breed:'Pastor',desc:'Protectivo y leal. Requiere espacio para correr.',img:'https://place-puppy.com/403x300'},
-  {id:'bella',name:'Bella',age:'5 años',breed:'Beagle',desc:'Tierna, algo traviesa y muy olfativa.',img:'https://place-puppy.com/404x300'},
-  {id:'rocky',name:'Rocky',age:'2 años',breed:'Bulldog',desc:'Tranquilo, fuerte y compañero fiel.',img:'https://place-puppy.com/405x300'},
-  {id:'sasha',name:'Sasha',age:'1 año',breed:'Husky',desc:'Muy activa, necesita ejercicio y le encanta correr.',img:'https://place-puppy.com/406x300'},
-  {id:'toby',name:'Toby',age:'6 años',breed:'Golden Retriever',desc:'Dócil, noble y buen guardián.',img:'https://place-puppy.com/407x300'},
-  {id:'nina',name:'Nina',age:'3 años',breed:'Chihuahua',desc:'Pequeñita pero con mucha personalidad.',img:'https://place-puppy.com/408x300'},
-  {id:'duke',name:'Duke',age:'4 años',breed:'Pastor Alemán',desc:'Leal y protector, excelente perro de compañía.',img:'https://place-puppy.com/409x300'}
+  {id:'oco',name:'Ocho',age:'3 años',breed:'Pastor',desc:'Protectivo y leal. Requiere espacio.',img:'https://place-puppy.com/403x300'},
+  {id:'toby',name:'Toby',age:'5 años',breed:'Beagle',desc:'Muy juguetón y glotón.',img:'https://place-puppy.com/404x300'},
+  {id:'kiara',name:'Kiara',age:'2 años',breed:'Golden Retriever',desc:'Dócil, amorosa y excelente compañera.',img:'https://place-puppy.com/405x300'},
+  {id:'rocky',name:'Rocky',age:'3 años',breed:'Bulldog',desc:'Tranquilo y un poco perezoso.',img:'https://place-puppy.com/406x300'},
+  {id:'nina',name:'Nina',age:'1 año',breed:'Caniche',desc:'Inteligente y activa.',img:'https://place-puppy.com/407x300'},
+  {id:'sultan',name:'Sultán',age:'6 años',breed:'Pastor Alemán',desc:'Leal y protector.',img:'https://place-puppy.com/408x300'},
+  {id:'daisy',name:'Daisy',age:'2 años',breed:'Mestiza pequeña',desc:'Muy cariñosa y alegre.',img:'https://place-puppy.com/409x300'}
 ];
 
-// --------- Resto de la lógica (igual que antes) ---------
+// Elementos principales
 const listEl = document.getElementById('list');
 const modal = document.getElementById('modal');
 const fichaEl = document.getElementById('ficha');
 const closeModal = document.getElementById('closeModal');
 const solicitudesEl = document.getElementById('solicitudes');
 
-function loadReviews(){return JSON.parse(localStorage.getItem('adopta_reviews')||'{}');}
-function saveReviews(obj){localStorage.setItem('adopta_reviews',JSON.stringify(obj));}
-function loadSolicitudes(){return JSON.parse(localStorage.getItem('adopta_solicitudes')||'[]');}
-function saveSolicitudes(arr){localStorage.setItem('adopta_solicitudes',JSON.stringify(arr));}
+// Helpers de storage
+function loadReviews(){ return JSON.parse(localStorage.getItem('adopta_reviews')||'{}'); }
+function saveReviews(obj){ localStorage.setItem('adopta_reviews',JSON.stringify(obj)); }
+function loadSolicitudes(){ return JSON.parse(localStorage.getItem('adopta_solicitudes')||'[]'); }
+function saveSolicitudes(arr){ localStorage.setItem('adopta_solicitudes',JSON.stringify(arr)); }
 
 // Render listado
 function renderList(){
@@ -142,47 +143,43 @@ function renderSolicitudes(){
   });
 }
 
-// Modal ficha
+// Modal funciones
 function openFicha(id){
   const dog=DOGS.find(d=>d.id===id);
   const reviews=loadReviews()[id]||[];
   fichaEl.innerHTML=`
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <div style="flex:1;min-width:220px"><img src="${dog.img}" alt="Foto de ${dog.name}" style="width:100%;border-radius:10px"></div>
-      <div style="flex:2;min-width:260px">
-        <h2>${dog.name} <small class="muted">(${dog.age})</small></h2>
-        <p class="muted">${dog.breed}</p>
-        <p>${dog.desc}</p>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button onclick="startAdopt('${id}')">Iniciar adopción</button>
-          <button class="secondary" onclick="shareDog('${id}')">Compartir</button>
-        </div>
-        <hr>
-        <h3>Reseñas</h3>
-        <div class="reviews" id="reviews-${id}">
-          ${reviews.length?reviews.map(r=>`<div class="review"><div class="rating">${'★'.repeat(r.rating)} ${'☆'.repeat(5-r.rating)}</div><div>${escapeHtml(r.text)}</div><div class="muted" style="font-size:13px">${new Date(r.date).toLocaleString()}</div></div>`).join(''):'<div class="muted">Aún no hay reseñas. Sé el primero.</div>'}
-        </div>
-        <hr>
-        <h4>Dejar reseña</h4>
-        <form onsubmit="event.preventDefault();submitReview('${id}')">
-          <label>Puntuación (1-5)</label>
-          <select id="rating-${id}" required>
-            <option value="5">5 - Excelente</option>
-            <option value="4">4 - Muy bueno</option>
-            <option value="3">3 - Bueno</option>
-            <option value="2">2 - Regular</option>
-            <option value="1">1 - Malo</option>
-          </select>
-          <label>Comentario</label>
-          <textarea id="text-${id}" required></textarea>
-          <div style="margin-top:8px"><button type="submit">Enviar reseña</button></div>
-        </form>
-      </div>
-    </div>`;
+    <h2>${dog.name} <small class="muted">(${dog.age})</small></h2>
+    <p class="muted">${dog.breed}</p>
+    <img src="${dog.img}" alt="Foto de ${dog.name}" style="width:100%;border-radius:10px">
+    <p>${dog.desc}</p>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button onclick="startAdopt('${id}')">Iniciar adopción</button>
+      <button class="secondary" onclick="shareDog('${id}')">Compartir</button>
+    </div>
+    <hr>
+    <h3>Reseñas</h3>
+    <div class="reviews" id="reviews-${id}">
+      ${reviews.length?reviews.map(r=>`<div class="review"><div class="rating">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><div>${escapeHtml(r.text)}</div><div class="muted">${new Date(r.date).toLocaleString()}</div></div>`).join(''):'<div class="muted">Aún no hay reseñas.</div>'}
+    </div>
+    <hr>
+    <h4>Dejar reseña</h4>
+    <form onsubmit="event.preventDefault();submitReview('${id}')">
+      <label>Puntuación</label>
+      <select id="rating-${id}" required>
+        <option value="5">5 - Excelente</option>
+        <option value="4">4 - Muy bueno</option>
+        <option value="3">3 - Bueno</option>
+        <option value="2">2 - Regular</option>
+        <option value="1">1 - Malo</option>
+      </select>
+      <label>Comentario</label>
+      <textarea id="text-${id}" required></textarea>
+      <div style="margin-top:8px"><button type="submit">Enviar reseña</button></div>
+    </form>`;
   showModal();
 }
 
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,chr=>({"&":"&amp;","<":"&lt;","">":"&gt;","\"":"&quot;","'":"&#39;"}[chr]));}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,chr=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[chr]));}
 function showModal(){modal.style.display='flex';modal.setAttribute('aria-hidden','false');}
 function hideModal(){modal.style.display='none';modal.setAttribute('aria-hidden','true');}
 closeModal.addEventListener('click',hideModal);
@@ -193,13 +190,15 @@ function startAdopt(id){
   const dog=DOGS.find(d=>d.id===id);
   fichaEl.innerHTML=`
     <h2>Solicitud de adopción — ${dog.name}</h2>
-    <p class="muted">Por favor proporciona tu dirección completa. Su solicitud será revisada en <strong>3 semanas</strong> y podrá recogerlo en <strong>3 a 5 días</strong>.</p>
     <form onsubmit="event.preventDefault();submitAdoption('${id}')">
-      <label>Nombre completo</label><input id="fullname" required>
-      <label>Dirección</label><input id="address" required>
-      <label>Teléfono (opcional)</label><input id="phone">
-      <div style="margin-top:10px" class="note">Nota: Demo escolar. Los datos se guardan localmente.</div>
-      <div style="margin-top:12px"><button type="submit">Enviar solicitud</button> <button type="button" class="ghost" onclick="hideModal()">Cancelar</button></div>
+      <label>Nombre completo</label>
+      <input id="fullname" type="text" required>
+      <label>Dirección</label>
+      <input id="address" type="text" required>
+      <label>Teléfono (opcional)</label>
+      <input id="phone" type="text">
+      <div class="note">Nota: Esta es una demo. Los datos se guardan en tu navegador.</div>
+      <div style="margin-top:12px"><button type="submit">Enviar solicitud</button></div>
     </form>`;
   showModal();
 }
@@ -210,31 +209,34 @@ function submitAdoption(dogId){
   const phone=document.getElementById('phone').value.trim();
   if(!address){alert('La dirección es obligatoria.');return}
   const solicitudes=loadSolicitudes();
-  const solicitud={id:'s_'+Date.now(),dogId,name:name||'Sin nombre',address,phone,status:'En revisión',created:new Date().toISOString(),reviewDue:new Date(Date.now()+21*24*60*60*1000).toISOString(),pickupWindow:'3-5 días'};
+  const solicitud={id:'s_'+Date.now(),dogId,name,address,phone,status:'En revisión',created:new Date().toISOString()};
   solicitudes.push(solicitud);saveSolicitudes(solicitudes);renderSolicitudes();
-  fichaEl.innerHTML=`<h2>Solicitud enviada ✔</h2><p>Gracias, <strong>${escapeHtml(solicitud.name)}</strong>. Tu solicitud para adoptar a <strong>${DOGS.find(d=>d.id===dogId).name}</strong> ha sido enviada.</p>`;
+  fichaEl.innerHTML=`<h2>Solicitud enviada ✔</h2><p>Gracias, <strong>${escapeHtml(name)}</strong>. Tu solicitud está en revisión.</p>`;
 }
 
 // Reseñas
 function submitReview(id){
-  const rating=parseInt(document.getElementById(`rating-${id}`).value);
-  const text=document.getElementById(`text-${id}`).value.trim();
+  const rating=parseInt(document.getElementById('rating-'+id).value);
+  const text=document.getElementById('text-'+id).value.trim();
   if(!text)return;
-  const reviews=loadReviews();if(!reviews[id])reviews[id]=[];
+  const reviews=loadReviews();
+  if(!reviews[id])reviews[id]=[];
   reviews[id].push({rating,text,date:new Date().toISOString()});
-  saveReviews(reviews);openFicha(id);
+  saveReviews(reviews);
+  openFicha(id);
 }
 
 // Compartir
 function shareDog(id){
   const dog=DOGS.find(d=>d.id===id);
-  const url=location.href.split('#')[0]+`#${id}`;
-  if(navigator.share){navigator.share({title:dog.name,text:dog.desc,url});}
-  else{navigator.clipboard.writeText(url);alert('Enlace copiado al portapapeles.');}
+  const url=location.href+'#'+id;
+  if(navigator.share){navigator.share({title:'Adopta a '+dog.name,text:dog.desc,url});}
+  else{navigator.clipboard.writeText(url);alert('Enlace copiado: '+url);}
 }
 
 // Inicializar
-renderList();renderSolicitudes();
+renderList();
+renderSolicitudes();
 </script>
 </body>
 </html>
