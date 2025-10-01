@@ -3,238 +3,181 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Adopta y Ayuda - Adopciones</title>
-  <meta name="description" content="Adopta y Ayuda - Adopta a tu nuevo mejor amigo. Sistema de adopción demo.">
+  <title>Adopta y Ayuda</title>
+  <meta name="description" content="Proyecto escolar: sistema de adopción de perros con reseñas y solicitudes.">
   <style>
-    :root{
-      --bg:#f6f7fb; --card:#fff; --accent:#2b8aef; --muted:#6b7280;
-      --radius:12px; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);color:#0f172a}
-    header{background:linear-gradient(90deg,var(--accent),#6dd3ff);color:#fff;padding:28px 18px;border-bottom-left-radius:18px;border-bottom-right-radius:18px}
-    .container{max-width:1100px;margin:22px auto;padding:0 18px}
-    h1{margin:0;font-size:28px;letter-spacing:-0.5px}
-    p.lead{margin:6px 0 0;opacity:.95}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:18px}
-    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 6px 18px rgba(11,15,30,0.06);display:flex;flex-direction:column}
-    .thumb{height:160px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:12px}
-    .meta{display:flex;gap:8px;align-items:center;justify-content:space-between}
-    .name{font-weight:700}
-    .muted{color:var(--muted);font-size:13px}
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f9fafb;color:#111}
+    header{background:#2b8aef;color:#fff;padding:20px;text-align:center}
+    header h1{margin:0}
+    .container{max-width:1100px;margin:20px auto;padding:0 15px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+    .card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08);display:flex;flex-direction:column}
+    .thumb{height:160px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px}
+    .name{font-weight:bold}
+    .muted{color:#666;font-size:14px}
     .actions{margin-top:auto;display:flex;gap:8px}
-    button{cursor:pointer;border:0;padding:10px 12px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600}
-    button.secondary{background:#eef2ff;color:var(--accent);font-weight:700}
-    button.ghost{background:transparent;border:1px solid #e6eefc;color:var(--accent);}
-    .small{padding:8px 10px;font-size:14px}
-
-    /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(10,12,20,0.45);display:none;align-items:center;justify-content:center;padding:18px}
-    .modal{width:100%;max-width:640px;background:var(--card);border-radius:12px;padding:18px;max-height:90vh;overflow-y:auto}
-
-    form .row{display:flex;gap:10px}
-    label{font-weight:600;font-size:14px}
-    input[type="text"],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    textarea{min-height:80px}
-
-    .note{background:#fff6db;padding:10px;border-radius:8px;border:1px solid #ffe4a3;color:#6b4a00}
-
-    footer{margin:28px 0 80px;color:var(--muted);text-align:center}
-
-    /* Reviews */
-    .reviews{margin-top:12px}
-    .review{border-top:1px dashed #eef2ff;padding:8px 0}
-    .rating{font-weight:700;color:var(--accent)}
-
-    @media (max-width:640px){.thumb{height:140px}}
+    button{cursor:pointer;border:0;padding:8px 12px;border-radius:8px;background:#2b8aef;color:#fff;font-weight:600}
+    button.secondary{background:#eef2ff;color:#2b8aef}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:18px}
+    .modal{background:#fff;border-radius:10px;padding:20px;max-width:640px;width:100%;max-height:90vh;overflow:auto}
+    .note{background:#fff3cd;padding:10px;border-radius:6px;border:1px solid #ffeeba;color:#856404;margin:10px 0}
+    footer{text-align:center;padding:20px;color:#666;font-size:14px}
+    textarea,input,select{width:100%;padding:8px;margin:6px 0 12px;border:1px solid #ccc;border-radius:6px}
+    h2,h3{margin-top:0}
+    .review{border-top:1px solid #eee;padding:8px 0}
+    .rating{color:#2b8aef;font-weight:bold}
   </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Adopta y Ayuda</h1>
-      <p class="lead">Encuentra y solicita la adopción de tu compañero ideal. Este es un sistema demo para proyectos escolares.</p>
-    </div>
+    <h1>Adopta y Ayuda</h1>
+    <p>Adopta a tu nuevo mejor amigo. Proyecto escolar.</p>
   </header>
 
   <main class="container">
-    <section aria-labelledby="catalogo">
-      <h2 id="catalogo">Perros disponibles</h2>
-      <p class="muted">Haz clic en <strong>Ver</strong> para más detalles o en <strong>Adoptar</strong> para iniciar la solicitud.</p>
+    <h2>Perros disponibles</h2>
+    <div id="list" class="grid"></div>
 
-      <div id="list" class="grid" aria-live="polite"></div>
-    </section>
-
-    <!-- Modal: ficha y adopción -->
-    <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="modal" id="modalContent">
-        <button id="closeModal" class="ghost small" style="float:right">Cerrar ✕</button>
-        <div id="ficha"></div>
-      </div>
-    </div>
-
-    <section style="margin-top:20px">
-      <h3>Solicitudes recientes (simuladas)</h3>
+    <section style="margin-top:30px">
+      <h3>Solicitudes recientes</h3>
       <div id="solicitudes" class="muted">No hay solicitudes aún.</div>
     </section>
-
-    <footer>
-      © Adopta y Ayuda — Proyecto escolar. Recomendado: Implementar backend para producción.
-    </footer>
   </main>
 
+  <div id="modal" class="modal-backdrop">
+    <div class="modal">
+      <button id="closeModal" style="float:right;background:#eee;color:#333;padding:4px 8px">✕</button>
+      <div id="ficha"></div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Adopta y Ayuda — Proyecto escolar.
+  </footer>
+
 <script>
-// Datos de perros ficticios
 const DOGS = [
-  {id:'luna',name:'Luna',age:'2 años',breed:'Mestiza',desc:'Alegre, sociable y le encanta jugar.',img:'https://place-puppy.com/400x300'},
-  {id:'max',name:'Max',age:'4 años',breed:'Labrador mix',desc:'Cariñoso y tranquilo. Ideal para familias.',img:'https://place-puppy.com/401x300'},
-  {id:'mora',name:'Mora',age:'1 año',breed:'Pequeña',desc:'Enérgica y curiosa. Necesita paseos diarios.',img:'https://place-puppy.com/402x300'},
-  {id:'oco',name:'Ocho',age:'3 años',breed:'Pastor',desc:'Protectivo y leal. Requiere espacio.',img:'https://place-puppy.com/403x300'},
-  {id:'toby',name:'Toby',age:'5 años',breed:'Beagle',desc:'Muy juguetón y glotón.',img:'https://place-puppy.com/404x300'},
-  {id:'kiara',name:'Kiara',age:'2 años',breed:'Golden Retriever',desc:'Dócil, amorosa y excelente compañera.',img:'https://place-puppy.com/405x300'},
-  {id:'rocky',name:'Rocky',age:'3 años',breed:'Bulldog',desc:'Tranquilo y un poco perezoso.',img:'https://place-puppy.com/406x300'},
-  {id:'nina',name:'Nina',age:'1 año',breed:'Caniche',desc:'Inteligente y activa.',img:'https://place-puppy.com/407x300'},
-  {id:'sultan',name:'Sultán',age:'6 años',breed:'Pastor Alemán',desc:'Leal y protector.',img:'https://place-puppy.com/408x300'},
-  {id:'daisy',name:'Daisy',age:'2 años',breed:'Mestiza pequeña',desc:'Muy cariñosa y alegre.',img:'https://place-puppy.com/409x300'}
+  {id:'luna',name:'Luna',age:'2 años',breed:'Mestiza',desc:'Alegre y sociable, buena con niños.',img:'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400'},
+  {id:'max',name:'Max',age:'4 años',breed:'Labrador',desc:'Cariñoso y tranquilo. Ideal para familias.',img:'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400'},
+  {id:'mora',name:'Mora',age:'1 año',breed:'Pequeña',desc:'Enérgica y curiosa. Necesita paseos diarios.',img:'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400'},
+  {id:'rocky',name:'Rocky',age:'3 años',breed:'Pastor',desc:'Protectivo y leal. Requiere espacio para correr.',img:'https://images.unsplash.com/photo-1619983081563-430f636ad1b3?w=400'},
+  {id:'nina',name:'Nina',age:'5 años',breed:'Golden Retriever',desc:'Dulce y obediente, le encanta la compañía.',img:'https://images.unsplash.com/photo-1507149833265-60c372daea22?w=400'},
+  {id:'toby',name:'Toby',age:'2 años',breed:'Beagle',desc:'Travieso y amigable, muy curioso.',img:'https://images.unsplash.com/photo-1504595403659-9088ce801e29?w=400'},
+  {id:'kiara',name:'Kiara',age:'6 meses',breed:'Mestiza pequeña',desc:'Cachorra juguetona y cariñosa.',img:'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400'},
+  {id:'duke',name:'Duke',age:'3 años',breed:'Husky',desc:'Energético y protector, necesita ejercicio diario.',img:'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400'},
+  {id:'sasha',name:'Sasha',age:'4 años',breed:'Boxer',desc:'Noble y muy cariñosa.',img:'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=400'},
+  {id:'coco',name:'Coco',age:'2 años',breed:'French Bulldog',desc:'Simpático y juguetón.',img:'https://images.unsplash.com/photo-1625246333195-d362cf6c5f77?w=400'}
 ];
 
-// Elementos principales
-const listEl = document.getElementById('list');
-const modal = document.getElementById('modal');
-const fichaEl = document.getElementById('ficha');
-const closeModal = document.getElementById('closeModal');
-const solicitudesEl = document.getElementById('solicitudes');
+const listEl=document.getElementById('list');
+const modal=document.getElementById('modal');
+const fichaEl=document.getElementById('ficha');
+const closeModal=document.getElementById('closeModal');
+const solicitudesEl=document.getElementById('solicitudes');
 
-// Helpers de storage
-function loadReviews(){ return JSON.parse(localStorage.getItem('adopta_reviews')||'{}'); }
-function saveReviews(obj){ localStorage.setItem('adopta_reviews',JSON.stringify(obj)); }
-function loadSolicitudes(){ return JSON.parse(localStorage.getItem('adopta_solicitudes')||'[]'); }
-function saveSolicitudes(arr){ localStorage.setItem('adopta_solicitudes',JSON.stringify(arr)); }
+function loadReviews(){return JSON.parse(localStorage.getItem('reviews')||'{}');}
+function saveReviews(obj){localStorage.setItem('reviews',JSON.stringify(obj));}
+function loadSolicitudes(){return JSON.parse(localStorage.getItem('solicitudes')||'[]');}
+function saveSolicitudes(arr){localStorage.setItem('solicitudes',JSON.stringify(arr));}
 
-// Render listado
 function renderList(){
   listEl.innerHTML='';
   DOGS.forEach(d=>{
-    const card=document.createElement('article');card.className='card';
+    const card=document.createElement('div');card.className='card';
     card.innerHTML=`
-      <div class="thumb" style="background-image:url('${d.img}')" aria-hidden="true"></div>
-      <div class="meta"><div><div class="name">${d.name}</div><div class="muted">${d.age} • ${d.breed}</div></div>
-      <div class="muted">ID: ${d.id}</div></div>
-      <p style="margin:8px 0 12px">${d.desc}</p>
+      <div class="thumb" style="background-image:url('${d.img}')"></div>
+      <div class="name">${d.name}</div>
+      <div class="muted">${d.age} • ${d.breed}</div>
+      <p>${d.desc}</p>
       <div class="actions">
-        <button class="secondary small" onclick="openFicha('${d.id}')">Ver</button>
-        <button class="small" onclick="startAdopt('${d.id}')">Adoptar</button>
+        <button class="secondary" onclick="openFicha('${d.id}')">Ver</button>
+        <button onclick="startAdopt('${d.id}')">Adoptar</button>
       </div>`;
     listEl.appendChild(card);
   });
 }
 
-// Render solicitudes
 function renderSolicitudes(){
   const s=loadSolicitudes();
-  if(!s.length){solicitudesEl.textContent='No hay solicitudes aún.';return}
-  solicitudesEl.innerHTML='';
-  s.slice().reverse().forEach(req=>{
-    const d=DOGS.find(x=>x.id===req.dogId)||{name:req.dogId};
-    const div=document.createElement('div');div.style.marginBottom='8px';
-    div.innerHTML=`<strong>${req.name||'Solicitante'}</strong> solicitó a <strong>${d.name}</strong> — Dirección: ${req.address} — Estado: <em>${req.status}</em>`;
-    solicitudesEl.appendChild(div);
-  });
+  solicitudesEl.innerHTML=s.length? s.map(req=>`<div><b>${req.name}</b> → ${req.dog} (${req.status})</div>`).join(''):'No hay solicitudes aún.';
 }
 
-// Modal funciones
 function openFicha(id){
-  const dog=DOGS.find(d=>d.id===id);
+  const d=DOGS.find(x=>x.id===id);
   const reviews=loadReviews()[id]||[];
   fichaEl.innerHTML=`
-    <h2>${dog.name} <small class="muted">(${dog.age})</small></h2>
-    <p class="muted">${dog.breed}</p>
-    <img src="${dog.img}" alt="Foto de ${dog.name}" style="width:100%;border-radius:10px">
-    <p>${dog.desc}</p>
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button onclick="startAdopt('${id}')">Iniciar adopción</button>
-      <button class="secondary" onclick="shareDog('${id}')">Compartir</button>
-    </div>
-    <hr>
+    <h2>${d.name} <small class="muted">${d.age}</small></h2>
+    <img src="${d.img}" alt="Foto de ${d.name}" style="max-width:100%;border-radius:8px">
+    <p><b>Raza:</b> ${d.breed}</p>
+    <p>${d.desc}</p>
+    <button onclick="startAdopt('${id}')">Adoptar</button>
+    <button onclick="shareDog('${id}')" class="secondary">Compartir</button>
     <h3>Reseñas</h3>
-    <div class="reviews" id="reviews-${id}">
-      ${reviews.length?reviews.map(r=>`<div class="review"><div class="rating">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><div>${escapeHtml(r.text)}</div><div class="muted">${new Date(r.date).toLocaleString()}</div></div>`).join(''):'<div class="muted">Aún no hay reseñas.</div>'}
-    </div>
-    <hr>
-    <h4>Dejar reseña</h4>
+    ${reviews.length?reviews.map(r=>`<div class="review"><div class="rating">${'★'.repeat(r.rating)}</div><p>${r.text}</p></div>`).join(''):'<p class="muted">Aún no hay reseñas.</p>'}
+    <h4>Deja una reseña</h4>
     <form onsubmit="event.preventDefault();submitReview('${id}')">
-      <label>Puntuación</label>
-      <select id="rating-${id}" required>
+      <select id="rating-${id}">
         <option value="5">5 - Excelente</option>
         <option value="4">4 - Muy bueno</option>
         <option value="3">3 - Bueno</option>
         <option value="2">2 - Regular</option>
         <option value="1">1 - Malo</option>
       </select>
-      <label>Comentario</label>
-      <textarea id="text-${id}" required></textarea>
-      <div style="margin-top:8px"><button type="submit">Enviar reseña</button></div>
-    </form>`;
+      <textarea id="text-${id}" required placeholder="Escribe tu opinión"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  `;
   showModal();
 }
 
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,chr=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[chr]));}
-function showModal(){modal.style.display='flex';modal.setAttribute('aria-hidden','false');}
-function hideModal(){modal.style.display='none';modal.setAttribute('aria-hidden','true');}
-closeModal.addEventListener('click',hideModal);
-modal.addEventListener('click',e=>{if(e.target===modal)hideModal();});
-
-// Adopción
 function startAdopt(id){
-  const dog=DOGS.find(d=>d.id===id);
+  const d=DOGS.find(x=>x.id===id);
   fichaEl.innerHTML=`
-    <h2>Solicitud de adopción — ${dog.name}</h2>
+    <h2>Adoptar a ${d.name}</h2>
     <form onsubmit="event.preventDefault();submitAdoption('${id}')">
-      <label>Nombre completo</label>
-      <input id="fullname" type="text" required>
-      <label>Dirección</label>
-      <input id="address" type="text" required>
-      <label>Teléfono (opcional)</label>
-      <input id="phone" type="text">
-      <div class="note">Nota: Esta es una demo. Los datos se guardan en tu navegador.</div>
-      <div style="margin-top:12px"><button type="submit">Enviar solicitud</button></div>
-    </form>`;
+      <input id="name" placeholder="Tu nombre" required>
+      <input id="address" placeholder="Tu dirección" required>
+      <button type="submit">Enviar solicitud</button>
+    </form>
+    <p class="note">La solicitud será revisada en 3 semanas. Si se aprueba, podrás recoger a ${d.name} en 3-5 días.</p>
+  `;
   showModal();
 }
 
-function submitAdoption(dogId){
-  const name=document.getElementById('fullname').value.trim();
-  const address=document.getElementById('address').value.trim();
-  const phone=document.getElementById('phone').value.trim();
-  if(!address){alert('La dirección es obligatoria.');return}
-  const solicitudes=loadSolicitudes();
-  const solicitud={id:'s_'+Date.now(),dogId,name,address,phone,status:'En revisión',created:new Date().toISOString()};
-  solicitudes.push(solicitud);saveSolicitudes(solicitudes);renderSolicitudes();
-  fichaEl.innerHTML=`<h2>Solicitud enviada ✔</h2><p>Gracias, <strong>${escapeHtml(name)}</strong>. Tu solicitud está en revisión.</p>`;
+function submitAdoption(id){
+  const name=document.getElementById('name').value;
+  const address=document.getElementById('address').value;
+  if(!address)return alert("La dirección es obligatoria.");
+  const d=DOGS.find(x=>x.id===id);
+  const s=loadSolicitudes();
+  s.push({dog:d.name,name,address,status:"En revisión"});
+  saveSolicitudes(s);
+  renderSolicitudes();
+  fichaEl.innerHTML=`<h2>Solicitud enviada ✔</h2><p>Tu solicitud para <b>${d.name}</b> está en revisión.</p>`;
 }
 
-// Reseñas
 function submitReview(id){
   const rating=parseInt(document.getElementById('rating-'+id).value);
-  const text=document.getElementById('text-'+id).value.trim();
-  if(!text)return;
+  const text=document.getElementById('text-'+id).value;
   const reviews=loadReviews();
   if(!reviews[id])reviews[id]=[];
-  reviews[id].push({rating,text,date:new Date().toISOString()});
+  reviews[id].push({rating,text});
   saveReviews(reviews);
   openFicha(id);
 }
 
-// Compartir
 function shareDog(id){
-  const dog=DOGS.find(d=>d.id===id);
-  const url=location.href+'#'+id;
-  if(navigator.share){navigator.share({title:'Adopta a '+dog.name,text:dog.desc,url});}
-  else{navigator.clipboard.writeText(url);alert('Enlace copiado: '+url);}
+  const d=DOGS.find(x=>x.id===id);
+  const url=location.href.split('#')[0]+'#'+id;
+  navigator.clipboard.writeText(url);
+  alert("Enlace copiado: "+url);
 }
 
-// Inicializar
+function showModal(){modal.style.display='flex';}
+function hideModal(){modal.style.display='none';}
+closeModal.addEventListener('click',hideModal);
+modal.addEventListener('click',e=>{if(e.target===modal)hideModal();});
+
 renderList();
 renderSolicitudes();
 </script>
