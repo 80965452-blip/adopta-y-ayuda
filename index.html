@@ -253,6 +253,26 @@ function submitReview(id){
   all[id].push({rating,text,date:new Date().toISOString()});
   saveReviews(all); openFicha(id);
 }
+  // Share
+function shareDog(id){
+  const dog = DOGS.find(d => d.id === id);
+  const url = window.location.href.split('#')[0] + '#' + id;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Adopta a ' + dog.name,
+      text: dog.desc,
+      url
+    });
+  } else {
+    navigator.clipboard.writeText(url);
+    alert("Enlace copiado al portapapeles: " + url);
+  }
+}
+
+// Inicialización
+renderList();
+renderSolicitudes();
+</script>
 
 // Share
 function shareDog(id){
